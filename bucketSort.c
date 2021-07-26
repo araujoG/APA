@@ -2,9 +2,9 @@
 
 #include "bubbleSort.c"
 
-#define tam_bucket 100
+#define tam_bucket 2500
 #define num_bucket 10
-#define max 10
+#define max 50
 
 typedef struct {
 	int topo;
