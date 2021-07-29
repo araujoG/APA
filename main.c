@@ -8,7 +8,7 @@
 #include "mergeSort.c"
 #include "tempoCpu.c"
 
-#define maximo 100
+#define maximo 500
 
 void print_array(int v[], int tam) {
     printf("[");
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
         seg_sistema_final;
     // 24630 com 50 elementos
     // int tamanho = 24630; // 30 * 821
-    int tamanho = 30000;
+    int tamanho = 100;
     int *aux = (int *)malloc(tamanho * sizeof(int));
     buildArray(aux, tamanho);
 
