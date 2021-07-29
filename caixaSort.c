@@ -2,7 +2,7 @@
 
 // Bucket só pra se inspirar
 void caixa_sort(int v[], int tam, int max) {
-	int caixa[max];
+	int *caixa = (int *)malloc(max * sizeof(int));
 	int i, j, k;
 
 	/* 1 */  // inicializa todos os "topo" com 0
@@ -15,7 +15,7 @@ void caixa_sort(int v[], int tam, int max) {
 
 	/* 3 */
 	k = 0;
-	for (j = 0; j < tam; j++){
+	for (j = 0; j < max; j++){
 		while (caixa[j] != 0) {
 			caixa[j]--;
 			v[k] = j;

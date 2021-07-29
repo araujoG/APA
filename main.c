@@ -4,11 +4,10 @@
 
 #include "bubbleSort.c"
 #include "insertionSort.c"
-#include "caixaSort.c"
 #include "mergeSort.c"
 #include "tempoCpu.c"
 
-#define maximo 500
+#define maximo 10
 
 void print_array(int v[], int tam) {
     printf("[");
@@ -32,7 +31,7 @@ int main(int argc, char const *argv[]) {
         seg_sistema_final;
     // 24630 com 50 elementos
     // int tamanho = 24630; // 30 * 821
-    int tamanho = 100;
+    int tamanho = 10000;
     int *aux = (int *)malloc(tamanho * sizeof(int));
     buildArray(aux, tamanho);
 
