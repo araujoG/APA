@@ -4,6 +4,7 @@
 
 #include "bubbleSort.c"
 #include "insertionSort.c"
+#include "caixaSort.c"
 #include "mergeSort.c"
 #include "tempoCpu.c"
 
