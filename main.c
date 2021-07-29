@@ -2,13 +2,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "bubbleSort.c"
 #include "insertionSort.c"
 #include "caixaSort.c"
 #include "mergeSort.c"
 #include "tempoCpu.c"
 
-#define maximo 1000
+#define maximo 10000000
 
 void print_array(int v[], int tam) {
     printf("[");
@@ -27,62 +28,57 @@ int confereResultado(int v[], int tam) {
     return 1;
 }
 
+void escreveFormatado(char* metodo, int tamanho, float tempo) {
+    // método tamanho tempoCpu
+    FILE *fp = fopen("saida.txt","a+");
+    fprintf(fp, "%s %d %f\n", metodo, tamanho, tempo);
+    fclose(fp);
+}
+
 int main(int argc, char const *argv[]) {
     double seg_CPU_inicial, seg_sistema_inicial, seg_CPU_final,
         seg_sistema_final;
     // 24630 com 50 elementos
     // int tamanho = 24630; // 30 * 821
-    int tamanho = 100000;
-    int *aux = (int *)malloc(tamanho * sizeof(int));
-    buildArray(aux, tamanho);
+    int tamanho = atoi(argv[1]);
+    int *original = (int *)malloc(tamanho * sizeof(int));
+    buildArray(original, tamanho);
+    float tempo;
+    int *vetor = (int *)malloc(tamanho * sizeof(int));
 
-    // Bucket Sort
-    int *aux_bucket = (int *)malloc(tamanho * sizeof(int));
-    memcpy(aux_bucket, aux, tamanho * sizeof(int));
+
+    // Caixa Sort
+    memcpy(vetor, original, tamanho * sizeof(int));
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-	caixa_sort(aux_bucket, tamanho, maximo);
+	caixa_sort(vetor, tamanho, maximo);
     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    printf("Bucket Sort\n");
-    //print_array(aux_bucket, tamanho);
-    if (confereResultado(aux_bucket, tamanho)) printf("\tResultado Correto");
-    printf("\tTempo = %f\n", seg_CPU_final - seg_CPU_inicial);
-    free(aux_bucket);
+    tempo = seg_CPU_final - seg_CPU_inicial;
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
 
     // Bubble Sort
-    int *aux_bubble = (int *)malloc(tamanho * sizeof(int));
-    memcpy(aux_bubble, aux, tamanho * sizeof(int));
+    memcpy(vetor, original, tamanho * sizeof(int));
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    bubbleSort(aux_bubble, tamanho);
+    bubbleSort(vetor, tamanho);
     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    printf("Bubble Sort\n");
-    // print_array(aux_bubble, tamanho);
-    if (confereResultado(aux_bubble, tamanho)) printf("\tResultado Correto");
-    printf("\tTempo = %f\n", seg_CPU_final - seg_CPU_inicial);
-    free(aux_bubble);
+    tempo = seg_CPU_final - seg_CPU_inicial;
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Bubble", tamanho, tempo);
 
     // Merge Sort
-    int *aux_merge = (int *)malloc(tamanho * sizeof(int));
-    memcpy(aux_merge, aux, tamanho * sizeof(int));
+    memcpy(vetor, original, tamanho * sizeof(int));
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    mergeSort(aux_merge, 0, tamanho - 1);
+    mergeSort(vetor, 0, tamanho - 1);
     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    printf("Merge Sort\n");
-    // print_array(aux_merge, tamanho);
-    if (confereResultado(aux_merge, tamanho)) printf("\tResultado Correto");
-    printf("\tTempo = %f\n", seg_CPU_final - seg_CPU_inicial);
-    free(aux_merge);
+    tempo = seg_CPU_final - seg_CPU_inicial;
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
 
     // Insertion Sort
-    int *aux_insertion = (int *)malloc(tamanho * sizeof(int));
-    memcpy(aux_insertion, aux, tamanho * sizeof(int));
-    free(aux);
+    memcpy(vetor, original, tamanho * sizeof(int));
+    free(original);
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    insertionSort(aux_insertion, tamanho);
+    insertionSort(vetor, tamanho);
     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    printf("Insertion Sort\n");
-    // print_array(aux_insertion, tamanho);
-    if (confereResultado(aux_insertion, tamanho)) printf("\tResultado Correto");
-    printf("\tTempo = %f\n", seg_CPU_final - seg_CPU_inicial);
-    free(aux_insertion);
+    tempo = seg_CPU_final - seg_CPU_inicial;
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Insertion", tamanho, tempo);
+    free(vetor);
     return 0;
 }
