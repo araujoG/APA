@@ -1,14 +1,14 @@
 // #include "insertionSort.c"
 #include <string.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "bubbleSort.c"
 #include "insertionSort.c"
 #include "caixaSort.c"
 #include "mergeSort.c"
 #include "tempoCpu.c"
 
-#define maximo 10
+#define maximo 1000
 
 void print_array(int v[], int tam) {
     printf("[");
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
         seg_sistema_final;
     // 24630 com 50 elementos
     // int tamanho = 24630; // 30 * 821
-    int tamanho = 10000;
+    int tamanho = 100000;
     int *aux = (int *)malloc(tamanho * sizeof(int));
     buildArray(aux, tamanho);
 
@@ -40,10 +40,10 @@ int main(int argc, char const *argv[]) {
     int *aux_bucket = (int *)malloc(tamanho * sizeof(int));
     memcpy(aux_bucket, aux, tamanho * sizeof(int));
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    caixa_sort(aux_bucket, tamanho, maximo);
+	caixa_sort(aux_bucket, tamanho, maximo);
     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
     printf("Bucket Sort\n");
-    print_array(aux_bucket, tamanho);
+    //print_array(aux_bucket, tamanho);
     if (confereResultado(aux_bucket, tamanho)) printf("\tResultado Correto");
     printf("\tTempo = %f\n", seg_CPU_final - seg_CPU_inicial);
     free(aux_bucket);
