@@ -30,7 +30,7 @@ int confereResultado(int v[], int tam) {
 
 void escreveFormatado(char* metodo, int tamanho, float tempo) {
     // método tamanho tempoCpu
-    FILE *fp = fopen("saida0.txt","a+");
+    FILE *fp = fopen("caixamergenote1.txt","a+");
     fprintf(fp, "%s %d %f\n", metodo, tamanho, tempo);
     fclose(fp);
 }
@@ -54,8 +54,8 @@ int main(int argc, char const *argv[]) {
         Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
         tempo = seg_CPU_final - seg_CPU_inicial;
     }
-        if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
-
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
+    tempo = 0.0;
     // Merge Sort
     while (tempo == 0.0){
         memcpy(vetor, original, tamanho * sizeof(int));
@@ -64,8 +64,8 @@ int main(int argc, char const *argv[]) {
         Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
         tempo = seg_CPU_final - seg_CPU_inicial;
     }
-        if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
-
+    if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
+    tempo = 0.0;
     // Bubble Sort
     // while (tempo == 0.0){
     //     memcpy(vetor, original, tamanho * sizeof(int));
@@ -75,6 +75,7 @@ int main(int argc, char const *argv[]) {
     //     tempo = seg_CPU_final - seg_CPU_inicial;
     // }
     //     if (confereResultado(vetor, tamanho)) escreveFormatado("Bubble", tamanho, tempo);
+    tempo = 0.0;
 
     // // Insertion Sort
     // while (tempo == 0.0){
@@ -89,7 +90,7 @@ int main(int argc, char const *argv[]) {
     free(vetor);
 
     if (tamanho == 106500) {
-        escreveFormatado("Nova", 0, 0);
+        escreveFormatado("Nova", maximo, maximo);
     }
 
     return 0;
