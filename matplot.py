@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
-arquivo = open("saida.txt","r")
+arquivo = open(f"{sys.argv[3]}.txt","r")
 resultados = arquivo.readlines()
 tamanhos = []
 caixa = {}
@@ -15,11 +15,12 @@ def	appendSample(dict, sample, tam):
 	dict[tam].append(sample)
 	return dict
 
-def	dictToArray(dict, tam, index = 0): 
+def	dictToArray(dict, tam): 
 	vetor = []
+	if len(dict[int(sys.argv[2])]) == 0:
+		return False
 	for i in tam:
-		dict[i].sort()
-		vetor.append(dict[i][index])
+		vetor.append(sum(dict[i])/float(len(dict[i])))
 	return vetor
 
 for tam in range(int(sys.argv[1]), int(sys.argv[2])+1, 500):
@@ -31,7 +32,11 @@ for tam in range(int(sys.argv[1]), int(sys.argv[2])+1, 500):
 
 for r in resultados:
 	mod, tam, tempo = r.split(' ')
-	if mod == "Caixa":
+	if mod == "Nova":
+		iteracao += 1
+	elif tempo == '0.000000\n':
+		print("tempo zerado")
+	elif mod == "Caixa":
 		caixa = appendSample(caixa, float(tempo.strip()), int(tam))
 	elif mod == "Bubble":
 		bubble = appendSample(bubble, float(tempo.strip()), int(tam))
@@ -39,13 +44,13 @@ for r in resultados:
 		merge = appendSample(merge, float(tempo.strip()), int(tam))
 	elif mod == "Insertion":
 		insertion = appendSample(insertion, float(tempo.strip()), int(tam))
-	elif mod == "Nova":
-		iteracao += 1
 
-caixaMin = dictToArray(caixa, tamanhos)
-caixaMax = dictToArray(caixa, tamanhos, 9)
-bubble = dictToArray(bubble, tamanhos)
+
+
+print(caixa[106500])
+caixa = dictToArray(caixa, tamanhos)
 merge = dictToArray(merge, tamanhos)
+bubble = dictToArray(bubble, tamanhos)
 insertion = dictToArray(insertion, tamanhos)
 
 print(f"plotando com {iteracao} iterações")
@@ -55,14 +60,14 @@ ax = fig.add_subplot(111)
 fig.set_figheight(25)
 fig.set_figwidth(50)
 
-plt.plot(tamanhos, caixaMin, label = "caixaMin")
-plt.plot(tamanhos, caixaMax, label = "caixaMax")
-
-# plt.plot(tamanhos, bubble,  label = "bubble")
-
-# plt.plot(tamanhos, merge, label = "merge")
-
-# plt.plot(tamanhos, insertion, label = "insertion")
+if caixa:
+	plt.plot(tamanhos, caixa, label = "caixa")
+if merge:
+	plt.plot(tamanhos, merge, label = "merge")
+if bubble:
+	plt.plot(tamanhos, bubble,  label = "bubble")
+if insertion:
+	plt.plot(tamanhos, insertion, label = "insertion")
 
 # ax.xaxis.set_ticks(np.arange(0,213,8))
 ax.tick_params(axis='y', which='major', labelsize=30)
@@ -72,7 +77,7 @@ plt.margins(0)
 plt.tight_layout()
 
 ax.legend(fontsize=50)
-plt.savefig('plt2.png')
+plt.savefig('plt_bubbleInsertion.png')
 
 # plt.xlim(20,150)
 # plt.savefig('plt_zoom.png')
