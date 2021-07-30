@@ -30,7 +30,7 @@ int confereResultado(int v[], int tam) {
 
 void escreveFormatado(char* metodo, int tamanho, float tempo) {
     // método tamanho tempoCpu
-    FILE *fp = fopen("saida.txt","a+");
+    FILE *fp = fopen("saida1.txt","a+");
     fprintf(fp, "%s %d %f\n", metodo, tamanho, tempo);
     fclose(fp);
 }
@@ -46,13 +46,13 @@ int main(int argc, char const *argv[]) {
     float tempo;
     int *vetor = (int *)malloc(tamanho * sizeof(int));
 
-    // Caixa Sort
-    memcpy(vetor, original, tamanho * sizeof(int));
-    Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-	caixa_sort(vetor, tamanho, maximo);
-    Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    tempo = seg_CPU_final - seg_CPU_inicial;
-    if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
+    // // Caixa Sort
+    // memcpy(vetor, original, tamanho * sizeof(int));
+    // Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
+	// caixa_sort(vetor, tamanho, maximo);
+    // Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
+    // tempo = seg_CPU_final - seg_CPU_inicial;
+    // if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
 
     // Bubble Sort
     memcpy(vetor, original, tamanho * sizeof(int));
@@ -62,13 +62,13 @@ int main(int argc, char const *argv[]) {
     tempo = seg_CPU_final - seg_CPU_inicial;
     if (confereResultado(vetor, tamanho)) escreveFormatado("Bubble", tamanho, tempo);
 
-    // Merge Sort
-    memcpy(vetor, original, tamanho * sizeof(int));
-    Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    mergeSort(vetor, 0, tamanho - 1);
-    Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-    tempo = seg_CPU_final - seg_CPU_inicial;
-    if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
+    // // Merge Sort
+    // memcpy(vetor, original, tamanho * sizeof(int));
+    // Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
+    // mergeSort(vetor, 0, tamanho - 1);
+    // Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
+    // tempo = seg_CPU_final - seg_CPU_inicial;
+    // if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
 
     // Insertion Sort
     memcpy(vetor, original, tamanho * sizeof(int));
