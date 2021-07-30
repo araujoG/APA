@@ -77,7 +77,7 @@ plt.margins(0)
 plt.tight_layout()
 
 ax.legend(fontsize=50)
-plt.savefig('plt_bubbleInsertion.png')
+plt.savefig('plt_mergeInsertion.png')
 
 # plt.xlim(20,150)
 # plt.savefig('plt_zoom.png')
