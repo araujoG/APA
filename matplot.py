@@ -47,7 +47,7 @@ for r in resultados:
 
 
 
-print(caixa[106500])
+print(merge[1000])
 caixa = dictToArray(caixa, tamanhos)
 merge = dictToArray(merge, tamanhos)
 bubble = dictToArray(bubble, tamanhos)
@@ -60,6 +60,11 @@ ax = fig.add_subplot(111)
 fig.set_figheight(25)
 fig.set_figwidth(50)
 
+plt.ylim([0, 0.2])
+ax.yaxis.set_ticks(np.arange(0.0,0.2,0.01))
+plt.xlim([0, 106500])
+ax.xaxis.set_ticks(np.arange(1000,106500,3000))
+
 if caixa:
 	plt.plot(tamanhos, caixa, label = "caixa")
 if merge:
@@ -69,9 +74,9 @@ if bubble:
 if insertion:
 	plt.plot(tamanhos, insertion, label = "insertion")
 
-# ax.xaxis.set_ticks(np.arange(0,213,8))
 ax.tick_params(axis='y', which='major', labelsize=30)
 ax.tick_params(axis='x', which='major', labelsize=30, rotation=45)
+
 
 plt.margins(0)
 plt.tight_layout()
