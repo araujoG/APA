@@ -46,7 +46,6 @@ int main(int argc, char const *argv[]) {
     float tempo;
     int *vetor = (int *)malloc(tamanho * sizeof(int));
 
-
     // Caixa Sort
     memcpy(vetor, original, tamanho * sizeof(int));
     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
@@ -80,5 +79,10 @@ int main(int argc, char const *argv[]) {
     tempo = seg_CPU_final - seg_CPU_inicial;
     if (confereResultado(vetor, tamanho)) escreveFormatado("Insertion", tamanho, tempo);
     free(vetor);
+
+    if (tamanho == 106500) {
+        escreveFormatado("Nova", 0, 0);
+    }
+
     return 0;
 }
