@@ -30,7 +30,7 @@ int confereResultado(int v[], int tam) {
 
 void escreveFormatado(char* metodo, int tamanho, float tempo) {
     // método tamanho tempoCpu
-    FILE *fp = fopen("caixamergenote1.txt","a+");
+    FILE *fp = fopen("saidabubble0.txt","a+");
     fprintf(fp, "%s %d %f\n", metodo, tamanho, tempo);
     fclose(fp);
 }
@@ -47,34 +47,34 @@ int main(int argc, char const *argv[]) {
     int *vetor = (int *)malloc(tamanho * sizeof(int));
 
     // Caixa Sort
-    while (tempo == 0.0){
-        memcpy(vetor, original, tamanho * sizeof(int));
-        Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-        caixa_sort(vetor, tamanho, maximo);
-        Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-        tempo = seg_CPU_final - seg_CPU_inicial;
-    }
-    if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
-    tempo = 0.0;
-    // Merge Sort
-    while (tempo == 0.0){
-        memcpy(vetor, original, tamanho * sizeof(int));
-        Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-        mergeSort(vetor, 0, tamanho - 1);
-        Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
-        tempo = seg_CPU_final - seg_CPU_inicial;
-    }
-    if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
-    tempo = 0.0;
-    // Bubble Sort
     // while (tempo == 0.0){
     //     memcpy(vetor, original, tamanho * sizeof(int));
     //     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
-    //     bubbleSort(vetor, tamanho);
+    //     caixa_sort(vetor, tamanho, maximo);
     //     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
     //     tempo = seg_CPU_final - seg_CPU_inicial;
     // }
-    //     if (confereResultado(vetor, tamanho)) escreveFormatado("Bubble", tamanho, tempo);
+    // if (confereResultado(vetor, tamanho)) escreveFormatado("Caixa", tamanho, tempo);
+    // tempo = 0.0;
+    // // Merge Sort
+    // while (tempo == 0.0){
+    //     memcpy(vetor, original, tamanho * sizeof(int));
+    //     Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
+    //     mergeSort(vetor, 0, tamanho - 1);
+    //     Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
+    //     tempo = seg_CPU_final - seg_CPU_inicial;
+    // }
+    // if (confereResultado(vetor, tamanho)) escreveFormatado("Merge", tamanho, tempo);
+    // tempo = 0.0;
+    // Bubble Sort
+    while (tempo == 0.0){
+        memcpy(vetor, original, tamanho * sizeof(int));
+        Tempo_CPU_Sistema(&seg_CPU_inicial, &seg_sistema_inicial);
+        bubbleSort(vetor, tamanho);
+        Tempo_CPU_Sistema(&seg_CPU_final, &seg_sistema_final);
+        tempo = seg_CPU_final - seg_CPU_inicial;
+    }
+        if (confereResultado(vetor, tamanho)) escreveFormatado("Bubble", tamanho, tempo);
     tempo = 0.0;
 
     // // Insertion Sort
@@ -86,8 +86,8 @@ int main(int argc, char const *argv[]) {
     //     tempo = seg_CPU_final - seg_CPU_inicial;
     // }
     //     if (confereResultado(vetor, tamanho)) escreveFormatado("Insertion", tamanho, tempo);
-    free(original);
-    free(vetor);
+    // free(original);
+    // free(vetor);
 
     if (tamanho == 106500) {
         escreveFormatado("Nova", maximo, maximo);
