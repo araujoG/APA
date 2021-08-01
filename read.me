@@ -4,4 +4,21 @@ Análise da eficiência dos seguintes algoritmos:
   - Caixa Sort
   - Merge Sort
 
-Temos a implementação 
+Temos a implementação de cada método em um arquivo com seu respectivo nome, 
+cada um deles é importado pelo main.c. Esse arquivo deve ser compilado e executado
+com os seguintes parâmetros:
+        
+        ./main <maximo> <tamanho> <saida>
+
+onde temos:
+    <maximo> = um inteiro que representa o maior número possível de ser inserido
+      no vetor a ser ordenado
+    <tamanho> = um inteiro que representa o tamanho do vetor a ser ordenado
+    <saida> = string com o nome do arquivo no qual a saída será escrita
+
+alguns exemplos de parâmetros para execução:
+
+  ./main 1000 100000 saida.txt
+  ./main 3000 45000 saida.txt
+  ./main 25000 15500 saida.txt
+  ./main 100000 100000 saida.txt

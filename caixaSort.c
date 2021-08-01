@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Bucket só pra se inspirar
 void caixa_sort(int v[], int tam, int max) {
 	int *caixa = (int *)malloc(max * sizeof(int));
 	int i, j, k;
