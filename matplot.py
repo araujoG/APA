@@ -57,13 +57,15 @@ print(f"plotando com {iteracao} iterações")
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-fig.set_figheight(25)
-fig.set_figwidth(50)
+fig.set_figheight(30)
+fig.set_figwidth(20)
 
-plt.ylim([0, 0.2])
-ax.yaxis.set_ticks(np.arange(0.0,0.2,0.01))
-plt.xlim([0, 106500])
-ax.xaxis.set_ticks(np.arange(1000,106500,3000))
+plt.ylim([0, 0.3])
+ax.yaxis.set_ticks(np.arange(0.0,0.31,0.009))
+ax.yaxis.set_label_text("Tempo (s)", fontsize=30)
+plt.xlim([0, 20000])
+ax.xaxis.set_ticks(np.arange(1000,20500,1000))
+ax.xaxis.set_label_text("Tamanho do vetor", fontsize=30)
 
 if caixa:
 	plt.plot(tamanhos, caixa, label = "caixa")
@@ -82,7 +84,7 @@ plt.margins(0)
 plt.tight_layout()
 
 ax.legend(fontsize=50)
-plt.savefig('plt_mergeInsertion.png')
+plt.savefig(f'plt_{sys.argv[3]}.png')
 
 # plt.xlim(20,150)
 # plt.savefig('plt_zoom.png')
