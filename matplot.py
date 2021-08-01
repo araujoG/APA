@@ -23,7 +23,7 @@ def	dictToArray(dict, tam):
 		vetor.append(sum(dict[i])/float(len(dict[i])))
 	return vetor
 
-for tam in range(int(sys.argv[1]), int(sys.argv[2])+1, 500):
+for tam in range(int(sys.argv[1]), int(sys.argv[2])+1, 10000):
 	caixa[tam] = []
 	bubble[tam] = []
 	merge[tam] = []
@@ -37,17 +37,14 @@ for r in resultados:
 	elif tempo == '0.000000\n':
 		print("tempo zerado")
 	elif mod == "Caixa":
-		caixa = appendSample(caixa, float(tempo.strip()), int(tam))
+		caixa = appendSample(caixa, float(tempo.strip())*1000, int(tam))
 	elif mod == "Bubble":
-		bubble = appendSample(bubble, float(tempo.strip()), int(tam))
+		bubble = appendSample(bubble, float(tempo.strip())*1000, int(tam))
 	elif mod == "Merge":
-		merge = appendSample(merge, float(tempo.strip()), int(tam))
+		merge = appendSample(merge, float(tempo.strip())*1000, int(tam))
 	elif mod == "Insertion":
-		insertion = appendSample(insertion, float(tempo.strip()), int(tam))
+		insertion = appendSample(insertion, float(tempo.strip())*1000, int(tam))
 
-
-
-print(merge[1000])
 caixa = dictToArray(caixa, tamanhos)
 merge = dictToArray(merge, tamanhos)
 bubble = dictToArray(bubble, tamanhos)
@@ -57,15 +54,15 @@ print(f"plotando com {iteracao} iterações")
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
-fig.set_figheight(30)
+fig.set_figheight(10)
 fig.set_figwidth(20)
 
-plt.ylim([0, 0.3])
-ax.yaxis.set_ticks(np.arange(0.0,0.31,0.009))
-ax.yaxis.set_label_text("Tempo (s)", fontsize=30)
-plt.xlim([0, 20000])
-ax.xaxis.set_ticks(np.arange(1000,20500,1000))
-ax.xaxis.set_label_text("Tamanho do vetor", fontsize=30)
+plt.ylim([0, 550])
+ax.yaxis.set_ticks(np.arange(0.0,560,50))
+ax.yaxis.set_label_text("Tempo (ms)", fontsize=30)
+plt.xlim([0, 10000000])
+ax.xaxis.set_ticks(np.arange(0,10000001,500000))
+ax.xaxis.set_label_text("Máximo (10^7)", fontsize=30)
 
 if caixa:
 	plt.plot(tamanhos, caixa, label = "caixa")
